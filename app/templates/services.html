@@ -1,0 +1,629 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VulnSpotter - Services</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+  />
+  <style>
+    .nav-tabs .nav-link {
+      color: #2c3e50;
+      font-weight: 500;
+    }
+    .nav-tabs .nav-link.active {
+      color: #e74c3c;
+      font-weight: bold;
+      border-bottom: 3px solid #e74c3c;
+    }
+    .tab-content {
+      padding: 2rem;
+      border: 1px solid #dee2e6;
+      border-top: none;
+      min-height: 300px;
+    }
+    .service-icon {
+      font-size: 1.5rem;
+      color: #e74c3c;
+      margin-right: 0.5rem;
+    }
+    .scan-btn {
+      background-color: #e74c3c;
+      border-color: #e74c3c;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    .result-item {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+    }
+    .vulnerable {
+      background-color: #ffdddd;
+      border-left: 4px solid #e74c3c;
+    }
+    .safe {
+      background-color: #ddffdd;
+      border-left: 4px solid #2ecc71;
+    }
+    #loading {
+      display: none;
+      margin-top: 1rem;
+    }
+    .export-btn {
+      background-color: #28a745;
+      border-color: #28a745;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand logo" href="/">VulnSpotter</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/services">Services</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+
+  <!-- Main Content -->
+  <div class="container my-5">
+    <h1 class="text-center mb-4">OWASP Top 10 Vulnerability Scanning</h1>
+    <p class="text-center lead mb-5">
+      Select a vulnerability category to scan for specific security risks
+    </p>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Full Scan</h5>
+        <p class="card-text">
+          Run a complete scan for all OWASP Top 10 vulnerabilities
+        </p>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="fullScanUrl"
+            placeholder="https://example.com"
+          />
+          <button
+            class="btn btn-primary scan-btn"
+            type="button"
+            id="fullScanButton"
+          >
+            Run Full Scan
+          </button>
+        </div>
+        <div id="loading" class="text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p>Scanning in progress...</p>
+        </div>
+        <div id="scanResults"></div>
+        <button id="exportBtn" class="btn btn-success export-btn" style="display:none;">
+          <i class="bi bi-download"></i> Export Results
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="a1-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#a1"
+          type="button"
+          role="tab"
+          aria-controls="a1"
+          aria-selected="true"
+        >
+          <i class="bi bi-shield-exclamation service-icon"></i>A1: Broken Access
+          Control
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="a2-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#a2"
+          type="button"
+          role="tab"
+          aria-controls="a2"
+          aria-selected="false"
+        >
+          <i class="bi bi-key service-icon"></i>A2: Cryptographic Failures
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="a3-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#a3"
+          type="button"
+          role="tab"
+          aria-controls="a3"
+          aria-selected="false"
+        >
+          <i class="bi bi-code-slash service-icon"></i>A3: Injection
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="a4-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#a4"
+          type="button"
+          role="tab"
+          aria-controls="a4"
+          aria-selected="false"
+        >
+          <i class="bi bi-pencil-square service-icon"></i>A4: Insecure Design
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="a5-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#a5"
+          type="button"
+          role="tab"
+          aria-controls="a5"
+          aria-selected="false"
+        >
+          <i class="bi bi-gear service-icon"></i>A5: Security Misconfiguration
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="myTabContent">
+      <!-- A1: Broken Access Control -->
+      <div
+        class="tab-pane fade show active"
+        id="a1"
+        role="tabpanel"
+        aria-labelledby="a1-tab"
+      >
+        <h3>A1: Broken Access Control</h3>
+        <p>
+          Access control enforces policy such that users cannot act outside of
+          their intended permissions. Failures typically lead to unauthorized
+          information disclosure, modification, or destruction of all data or
+          performing a business function outside the user's limits.
+        </p>
+
+        <h5 class="mt-4">What we scan for:</h5>
+        <ul>
+          <li>Vertical and horizontal privilege escalation</li>
+          <li>Insecure direct object references (IDOR)</li>
+          <li>Missing or improper authorization checks</li>
+          <li>Directory traversal vulnerabilities</li>
+        </ul>
+
+        <div class="mt-4">
+          <label for="targetUrl1" class="form-label">Enter target URL:</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="targetUrl1"
+              placeholder="https://example.com"
+            />
+            <button
+              class="btn btn-primary scan-btn"
+              type="button"
+              id="scanButton1"
+            >
+              Scan Now
+            </button>
+          </div>
+        </div>
+        <div id="resultA1" class="mt-3"></div>
+      </div>
+
+      <!-- A2: Cryptographic Failures -->
+      <div
+        class="tab-pane fade"
+        id="a2"
+        role="tabpanel"
+        aria-labelledby="a2-tab"
+      >
+        <h3>A2: Cryptographic Failures</h3>
+        <p>
+          Previously known as "Sensitive Data Exposure," this category focuses
+          on failures related to cryptography which often lead to exposure of
+          sensitive data.
+        </p>
+
+        <h5 class="mt-4">What we scan for:</h5>
+        <ul>
+          <li>Use of weak or deprecated cryptographic algorithms</li>
+          <li>Missing transport layer security (TLS)</li>
+          <li>Improper certificate validation</li>
+          <li>Storage of sensitive data without encryption</li>
+          <li>Hard-coded cryptographic keys</li>
+        </ul>
+
+        <div class="mt-4">
+          <label for="targetUrl2" class="form-label">Enter target URL:</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="targetUrl2"
+              placeholder="https://example.com"
+            />
+            <button
+              class="btn btn-primary scan-btn"
+              type="button"
+              id="scanButton2"
+            >
+              Scan Now
+            </button>
+          </div>
+        </div>
+        <div id="resultA2" class="mt-3"></div>
+      </div>
+
+      <!-- A3: Injection -->
+      <div
+        class="tab-pane fade"
+        id="a3"
+        role="tabpanel"
+        aria-labelledby="a3-tab"
+      >
+        <h3>A3: Injection</h3>
+        <p>
+          Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when
+          untrusted data is sent to an interpreter as part of a command or query.
+        </p>
+
+        <h5 class="mt-4">What we scan for:</h5>
+        <ul>
+          <li>SQL injection</li>
+          <li>Command injection</li>
+          <li>LDAP injection</li>
+          <li>NoSQL injection</li>
+          <li>Cross-site scripting (XSS)</li>
+        </ul>
+
+        <div class="mt-4">
+          <label for="targetUrl3" class="form-label">Enter target URL:</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="targetUrl3"
+              placeholder="https://example.com"
+            />
+            <button
+              class="btn btn-primary scan-btn"
+              type="button"
+              id="scanButton3"
+            >
+              Scan Now
+            </button>
+          </div>
+        </div>
+        <div id="resultA3" class="mt-3"></div>
+      </div>
+
+      <!-- A4: Insecure Design -->
+      <div
+        class="tab-pane fade"
+        id="a4"
+        role="tabpanel"
+        aria-labelledby="a4-tab"
+      >
+        <h3>A4: Insecure Design</h3>
+        <p>
+          Insecure design refers to risks related to design flaws and missing
+          security controls early in the development lifecycle.
+        </p>
+
+        <h5 class="mt-4">What we scan for:</h5>
+        <ul>
+          <li>Lack of threat modeling</li>
+          <li>Missing security requirements</li>
+          <li>Design flaws leading to security risks</li>
+          <li>Insecure architecture patterns</li>
+        </ul>
+
+        <div class="mt-4">
+          <label for="targetUrl4" class="form-label">Enter target URL:</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="targetUrl4"
+              placeholder="https://example.com"
+            />
+            <button
+              class="btn btn-primary scan-btn"
+              type="button"
+              id="scanButton4"
+            >
+              Scan Now
+            </button>
+          </div>
+        </div>
+        <div id="resultA4" class="mt-3"></div>
+      </div>
+
+      <!-- A5: Security Misconfiguration -->
+      <div
+        class="tab-pane fade"
+        id="a5"
+        role="tabpanel"
+        aria-labelledby="a5-tab"
+      >
+        <h3>A5: Security Misconfiguration</h3>
+        <p>
+          Security misconfiguration is the most common issue and often a result
+          of insecure default configurations, incomplete or ad hoc configurations,
+          open cloud storage, misconfigured HTTP headers, and verbose error messages.
+        </p>
+
+        <h5 class="mt-4">What we scan for:</h5>
+        <ul>
+          <li>Default accounts and passwords</li>
+          <li>Unnecessary features enabled (e.g., ports, services)</li>
+          <li>Outdated software and patches missing</li>
+          <li>Misconfigured HTTP headers</li>
+          <li>Exposed error messages</li>
+        </ul>
+
+        <div class="mt-4">
+          <label for="targetUrl5" class="form-label">Enter target URL:</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="targetUrl5"
+              placeholder="https://example.com"
+            />
+            <button
+              class="btn btn-primary scan-btn"
+              type="button"
+              id="scanButton5"
+            >
+              Scan Now
+            </button>
+          </div>
+        </div>
+        <div id="resultA5" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script>
+    // Store scan results for export
+    let currentScanResults = null;
+    
+    // Initialize event listeners when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Full scan button
+      document.getElementById('fullScanButton').addEventListener('click', runFullScan);
+      
+      // Individual scan buttons
+      document.getElementById('scanButton1').addEventListener('click', () => runSingleScan('A01: Broken Access Control', 'targetUrl1', 'resultA1'));
+      document.getElementById('scanButton2').addEventListener('click', () => runSingleScan('A02: Cryptographic Failures', 'targetUrl2', 'resultA2'));
+      document.getElementById('scanButton3').addEventListener('click', () => runSingleScan('A03: Injection', 'targetUrl3', 'resultA3'));
+      document.getElementById('scanButton4').addEventListener('click', () => runSingleScan('A04: Insecure Design', 'targetUrl4', 'resultA4'));
+      document.getElementById('scanButton5').addEventListener('click', () => runSingleScan('A05: Security Misconfiguration', 'targetUrl5', 'resultA5'));
+      
+      // Export button
+      document.getElementById('exportBtn').addEventListener('click', exportResults);
+    });
+
+    // Simulate API call with realistic responses
+    async function fakeScanAPI(category, url) {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Return different results based on category
+      switch(category) {
+        case 'A01: Broken Access Control':
+          return [
+            { issue: "Admin panel accessible without authentication", status: "vulnerable" },
+            { issue: "IDOR vulnerability in user profile endpoint", status: "vulnerable" }
+          ];
+        case 'A02: Cryptographic Failures':
+          return url.startsWith('http://') ? 
+            [{ issue: "Site not using HTTPS", status: "vulnerable" }] : 
+            [{ issue: "TLS 1.0 enabled", status: "vulnerable" }];
+        case 'A03: Injection':
+          return [
+            { issue: "SQL injection in search parameter", status: "vulnerable" },
+            { issue: "Reflected XSS in contact form", status: "vulnerable" }
+          ];
+        case 'A04: Insecure Design':
+          return [
+            { issue: "No rate limiting on login page", status: "vulnerable" }
+          ];
+        case 'A05: Security Misconfiguration':
+          return [
+            { issue: "Default admin credentials (admin/admin)", status: "vulnerable" },
+            { issue: "Directory listing enabled", status: "vulnerable" }
+          ];
+        default:
+          return [];
+      }
+    }
+
+    // Single category scan function
+    async function runSingleScan(category, inputId, resultDivId) {
+      const url = document.getElementById(inputId).value.trim();
+      const resultDiv = document.getElementById(resultDivId);
+      
+      if (!url) {
+        alert('Please enter a valid URL');
+        return;
+      }
+      
+      // Show loading state
+      resultDiv.innerHTML = '<div class="text-center my-3"><div class="spinner-border text-primary" role="status"></div><p>Scanning...</p></div>';
+      
+      try {
+        const results = await fakeScanAPI(category, url);
+        
+        // Display results
+        if (results.length === 0) {
+          resultDiv.innerHTML = `<div class="alert alert-success">No vulnerabilities found for ${category}</div>`;
+        } else {
+          let html = `<h5>Scan Results for ${category}</h5>`;
+          results.forEach(result => {
+            const cls = result.status === "vulnerable" ? "vulnerable" : "safe";
+            html += `<div class="result-item ${cls}">${result.issue}</div>`;
+          });
+          resultDiv.innerHTML = html;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">Scan failed: ${error.message}</div>`;
+      }
+    }
+
+    // Full scan function
+    async function runFullScan() {
+      const url = document.getElementById('fullScanUrl').value.trim();
+      const scanResultsDiv = document.getElementById('scanResults');
+      const loadingDiv = document.getElementById('loading');
+      const exportBtn = document.getElementById('exportBtn');
+      
+      if (!url) {
+        alert('Please enter a valid URL');
+        return;
+      }
+      
+      // Show loading state
+      scanResultsDiv.innerHTML = '';
+      loadingDiv.style.display = 'block';
+      exportBtn.style.display = 'none';
+      
+      try {
+        const categories = [
+          'A01: Broken Access Control',
+          'A02: Cryptographic Failures',
+          'A03: Injection',
+          'A04: Insecure Design',
+          'A05: Security Misconfiguration'
+        ];
+        
+        let allResults = [];
+        let html = '<h4>Full Scan Results</h4>';
+        
+        // Scan each category
+        for (const category of categories) {
+          const results = await fakeScanAPI(category, url);
+          allResults.push({ category, results });
+          
+          html += `<h5 class="mt-3">${category}</h5>`;
+          if (results.length === 0) {
+            html += '<div class="alert alert-success">No vulnerabilities found</div>';
+          } else {
+            results.forEach(result => {
+              const cls = result.status === "vulnerable" ? "vulnerable" : "safe";
+              html += `<div class="result-item ${cls}">${result.issue}</div>`;
+            });
+          }
+        }
+        
+        // Store results for export
+        currentScanResults = allResults;
+        
+        // Display results
+        scanResultsDiv.innerHTML = html;
+        exportBtn.style.display = 'block';
+      } catch (error) {
+        scanResultsDiv.innerHTML = `<div class="alert alert-danger">Scan failed: ${error.message}</div>`;
+      } finally {
+        loadingDiv.style.display = 'none';
+      }
+    }
+
+    // Export results function
+    function exportResults() {
+      if (!currentScanResults || currentScanResults.length === 0) {
+        alert('No results to export');
+        return;
+      }
+      
+      // Format results as text
+      let content = 'VulnSpotter Vulnerability Report\n';
+      content += '================================\n\n';
+      
+      currentScanResults.forEach(({ category, results }) => {
+        content += `${category}\n`;
+        content += '--------------------------------\n';
+        
+        if (results.length === 0) {
+          content += 'No vulnerabilities found\n\n';
+        } else {
+          results.forEach(result => {
+            content += `[${result.status.toUpperCase()}] ${result.issue}\n`;
+          });
+          content += '\n';
+        }
+      });
+      
+      // Create download link
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `vulnerability-scan-${new Date().toISOString().slice(0, 10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+   <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>© 2025 VulnSpotter by Team Chakravyuh Solvers </p>
+        <p ></p>A lightweight Automated OWASP Top Ten Vulnerability scanner which made in Hack-4-Mini Hackathon</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnSpotter - OWASP Vulnerability Scanner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .btn-scan {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+            padding: 0.8rem 2rem;
+            font-weight: bold;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 3px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <div class="logo">VulnSpotter</div>
+            <h1 class="display-4 fw-bold">OWASP Top 10 Vulnerability Scanner</h1>
+            <p class="lead">A lightweight automated scanner for the most critical web application security risks</p>
+            <a href="/services" class="btn btn-primary btn-lg btn-scan mt-3">Start Scanning</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container mb-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-shield-lock"></i>
+                </div>
+                <h3>Comprehensive Scanning</h3>
+                <p>Detect all OWASP Top 10 vulnerabilities including SQLi, XSS, and more with advanced detection
+                    algorithms.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-speedometer2"></i>
+                </div>
+                <h3>Fast & Efficient</h3>
+                <p>Lightweight Python-based scanner that delivers quick results without compromising accuracy.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+                <h3>Detailed Reports</h3>
+                <p>Get clear, actionable reports with vulnerability details and remediation guidance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="container py-5 bg-light">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Security Services</h2>
+            <p class="lead">Comprehensive security solutions for your web applications</p>
+        </div>
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-database-fill-lock"></i>
+                        </div>
+                        <h5 class="card-title">SQL Injection Scanning</h5>
+                        <p class="card-text">Detect and prevent SQL injection vulnerabilities that could compromise your
+                            databases.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 2 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-code-square"></i>
+                        </div>
+                        <h5 class="card-title">XSS Protection</h5>
+                        <p class="card-text">Identify Cross-Site Scripting vulnerabilities that could allow attackers to
+                            execute malicious scripts.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 3 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="card-title">Authentication Testing</h5>
+                        <p class="card-text">Check for broken authentication and session management vulnerabilities.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 4 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+                        <h5 class="card-title">Access Control Testing</h5>
+                        <p class="card-text">Verify proper access controls to prevent unauthorized access to sensitive
+                            functionality.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 5 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-exclamation"></i>
+                        </div>
+                        <h5 class="card-title">Security Misconfiguration</h5>
+                        <p class="card-text">Identify security misconfigurations that could expose your application to
+                            attacks.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 6 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-file-earmark-lock"></i>
+                        </div>
+                        <h5 class="card-title">Sensitive Data Exposure</h5>
+                        <p class="card-text">Detect improper protection of sensitive data like passwords and credit
+                            cards.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 7 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-x-octagon-fill"></i>
+                        </div>
+                        <h5 class="card-title">XXE Protection</h5>
+                        <p class="card-text">Check for XML External Entity vulnerabilities that could lead to data
+                            disclosure.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 8 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </div>
+                        <h5 class="card-title">Insecure Deserialization</h5>
+                        <p class="card-text">Identify insecure deserialization that could lead to remote code execution.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 9 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-diagram-3-fill"></i>
+                        </div>
+                        <h5 class="card-title">Component Analysis</h5>
+                        <p class="card-text">Detect known vulnerabilities in components with known security issues.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 10 -->
+            <div class="col-md-4">
+                <div class="card service-card">
+                    <div class="card-body">
+                        <div class="feature-icon">
+                            <i class="bi bi-journal-album"></i>
+                        </div>
+                        <h5 class="card-title">Logging & Monitoring</h5>
+                        <p class="card-text">Assess insufficient logging and monitoring that could delay breach
+                            detection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Team</h2>
+            <p class="lead">Team Chakravyuh Solvers </p>
+        </div>
+        <div class="row justify-content-center">
+            <!-- Team Member 1 -->
+            <div class="col-md-5 mb-4">
+                <div class="team-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQG9WPw6alHlPw/profile-displayphoto-shrink_200_200/B4EZXibzYHH0Ac-/0/1743260695194?e=1753920000&v=beta&t=OdCG-Y19DbGGd5FjJ87s1ETmzcyLVGw3CiNERnjcVj8"
+                        alt="Team Member" class="team-img">
+                    <h4>Sanket Bhamare</h4>
+                    <p class="text-primary">SDE - Lead</p>
+                    <p>Pursuing B.Tech in Computer Science with specialization in Cyber Security and Forensics at
+                        Sandip University</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/bhamare-sanket/" class="text-dark me-2"><i class="bi bi-linkedin"></i></a>
+                        <!-- <a href="#" class="text-dark me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-dark"><i class="bi bi-github"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="col-md-5 mb-4">
+                <div class="team-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQE9wXtqQzZwqg/profile-displayphoto-shrink_200_200/B4DZXiwr78HwAY-/0/1743266170562?e=1753920000&v=beta&t=xSc9XeTNpJFEyL4xhJ35PkgciEWENFt4Pjmvtyhscyw" alt="Team Member" class="team-img">
+                    <h4>Shivam Dhumal</h4>
+                    <p class="text-primary">AI/ML Specialist</p>
+                    <p>Pursuing B.Tech in Computer Science with specialization in Cloud Technology and Information
+                        Security at Sandip University</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/shivam-dhumal/" class="text-dark me-2"><i class="bi bi-linkedin"></i></a>
+                        <!-- <a href="#" class="text-dark me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-dark"><i class="bi bi-github"></i></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>© 2025 VulnSpotter by Team Chakravyuh Solvers </p>
+            <p>A lightweight Automated OWASP Top Ten Vulnerability scanner which made in Hack-4-Mini Hackathon</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</body>
+
+</html>
