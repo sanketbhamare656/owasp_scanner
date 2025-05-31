@@ -69,13 +69,7 @@ OWASP_SCANNER/
 > 📽️ Watch the demo here:  
 [![Watch Demo](https://img.youtube.com/vi/c62PoY_IMZM/0.jpg)](https://youtu.be/c62PoY_IMZM)
 
-### 📷 Screenshots
 
-| Dashboard | Scan Results | Header Check | AI Summary |
-|-----------|--------------|---------------|------------|
-| ![img1](main/img1.png) | ![img2](main/img2.png) | ![img3](main/img3.png) | ![img4](main/img4.png) |
-
----
 
 ## 🛠️ Setup Instructions
 
