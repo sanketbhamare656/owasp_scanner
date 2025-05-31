@@ -20,29 +20,37 @@ A powerful, open-source **Web Vulnerability Scanner** that detects issues from t
 - 🤖 **AI Summary via Gemini** – Generates a non-technical summary of findings using Gemini AI. 
 
 ---
----
+
+## 🗂️ Project Structure
+
 OWASP_SCANNER/
 │
 ├── app/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── scanner.py
-│   ├── modules/
-│   │   ├── __init__.py
-│   │   ├── auth_failure.py
-│   │   ├── bac.py
-│   │   └── ... (other modules)
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── chat.html
-│   │   └── ...
-│   └── static/
-│       ├── css/
-│       └── js/
+│ ├── init.py
+│ ├── models.py
+│ ├── routes.py
+│ ├── scanner.py
+│ ├── modules/
+│ │ ├── init.py
+│ │ ├── auth_failure.py
+│ │ ├── bac.py
+│ │ └── ... (other modules)
+│ ├── templates/
+│ │ ├── base.html
+│ │ ├── chat.html
+│ │ └── ...
+│ └── static/
+│ ├── css/
+│ └── js/
 │
 ├── instance/
-│   └── scanner.db
+│ └── scanner.db
+│
+├── main/
+│ ├── img1.png
+│ ├── img2.png
+│ ├── img3.png
+│ └── img4.png
 │
 ├── venv/
 ├── .env
@@ -52,12 +60,20 @@ OWASP_SCANNER/
 ├── README.md
 ├── requirements.txt
 └── run.py
----
-## 🖼️ Demo (optional)
 
-> 🚀 Add a demo GIF/screenshot of your app in action here  
-> Example:  
-![Demo](https://your-demo-link.gif)
+
+---
+
+## 🖼️ Demo
+
+> 📽️ Watch the demo here:  
+[![Watch Demo](https://img.youtube.com/vi/c62PoY_IMZM/0.jpg)](https://youtu.be/c62PoY_IMZM)
+
+### 📷 Screenshots
+
+| Dashboard | Scan Results | Header Check | AI Summary |
+|-----------|--------------|---------------|------------|
+| ![img1](main/img1.png) | ![img2](main/img2.png) | ![img3](main/img3.png) | ![img4](main/img4.png) |
 
 ---
 
@@ -65,12 +81,12 @@ OWASP_SCANNER/
 
 ```bash
 # 1️⃣ Clone the repository
-git clone [https://github.com/yourusername/owasp-scanner.git](https://github.com/sanketbhamare656/owasp_scanner.git)
-cd owasp-scanner
+git clone https://github.com/sanketbhamare656/owasp_scanner.git
+cd owasp_scanner
 
 # 2️⃣ (Optional) Create a virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # 3️⃣ Install dependencies
 pip install -r requirements.txt
@@ -79,63 +95,4 @@ pip install -r requirements.txt
 export GEMINI_API_KEY="your-google-api-key"  # or use .env
 
 # 5️⃣ Run the scanner
-python scanner.py
-```
-
----
-
-## 🧪 Example Usage
-
-```python
-from scanner import Top10Scanner
-
-scanner = Top10Scanner(gemini_api_key="your-gemini-key")
-results = scanner.scan("https://example.com")
-print(results['ai_summary'])  # Optional Gemini-based summary
-```
-
----
-
-## 📚 Educational Value
-
-This project helps developers:
-
-- Learn how OWASP Top 10 vulnerabilities manifest
-- Understand the importance of headers, access control, and input validation
-- Practice secure coding and ethical hacking skills
-- Build security awareness into the SDLC
-
----
-
-## 🤖 Powered by
-
-- [Google Gemini AI](https://deepmind.google/technologies/gemini/)
-- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
-- [Requests](https://docs.python-requests.org/en/latest/)
-- [Regex](https://docs.python.org/3/library/re.html)
-
----
-
-## 🤝 Collaborators
-
-This project is proudly built with ❤️ by:
-
-- 👨‍💻 [Sanket Bhamare](https://github.com/sanketbhamare656) — Lead Developer
-- 👨‍💻 [Shivam Dhumal](https://github.com/shivamdhumal77) — Core Contributor
-
-Together, we built this to make web security scanning **open, free, and beginner-friendly**!
-
-Want to join us in improving this? Fork the repo or drop a ⭐️ to support.
-
----
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🌐 Author
-
-**Sanket | The Developer 🛡️**  
-📫 [Connect on LinkedIn](hhttps://www.linkedin.com/in/bhamare-sanket/ttps://www.linkedin.com) • 
-
+python app/scanner.py
