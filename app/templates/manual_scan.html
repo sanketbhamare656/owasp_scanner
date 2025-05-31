@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VulnSpotter - OWASP Vulnerability Scanner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .form-section {
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-scan {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+            padding: 0.8rem 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .result-box {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .result-box pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="http://127.0.0.1:1234/">VulnSpotter</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/chat">Chat</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-4 fw-bold">OWASP Top 10 Vulnerability Manual Scanner</h1>
+        <p class="lead">Paste your code and scan for security risks.</p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="form-section">
+        <!-- Instructional Description -->
+        <div class="mb-4">
+            <h5 class="fw-bold">How to Use:</h5>
+            <p class="text-muted mb-0">
+                Select the type of OWASP vulnerability you want to scan for from the dropdown below.
+                Then, paste your code snippet or dependency file content in the textbox and click 
+                <strong>"Scan Now"</strong> to analyze for potential security issues.
+                <br>Results will be shown below with highlighted findings if any vulnerabilities are detected.
+            </p>
+        </div>
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="vuln_type" class="form-label fw-bold">Select Vulnerability Type:</label>
+                <select class="form-select" name="vuln_type" id="vuln_type">
+                    {% for val, label in options %}
+                        <option value="{{ val }}" {% if val == selected %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="code" class="form-label fw-bold">Paste Your Code or Dependency File:</label>
+                <textarea class="form-control" id="code" name="code" rows="10" required>{{ code|default('') }}</textarea>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-scan">Scan Now</button>
+            </div>
+        </form>
+    </div>
+
+    {% if findings is not none %}
+        <div class="result-box mt-4">
+            <h4 class="fw-bold">Scan Results:</h4>
+            {% if findings %}
+                <ul class="list-group mt-3">
+                    {% for finding in findings %}
+                        <li class="list-group-item"><pre>{{ finding }}</pre></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-success mt-3 fw-semibold">✅ No vulnerabilities detected.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>© 2025 VulnSpotter by Team Chakravyuh Solvers</p>
+        <p>A lightweight Automated OWASP Top Ten Vulnerability scanner made in Hack-4-Mini Hackathon</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
