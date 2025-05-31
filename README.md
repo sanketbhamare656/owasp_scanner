@@ -20,7 +20,39 @@ A powerful, open-source **Web Vulnerability Scanner** that detects issues from t
 - 🤖 **AI Summary via Gemini** – Generates a non-technical summary of findings using Gemini AI. 
 
 ---
-
+---
+OWASP_SCANNER/
+│
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── routes.py
+│   ├── scanner.py
+│   ├── modules/
+│   │   ├── __init__.py
+│   │   ├── auth_failure.py
+│   │   ├── bac.py
+│   │   └── ... (other modules)
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── chat.html
+│   │   └── ...
+│   └── static/
+│       ├── css/
+│       └── js/
+│
+├── instance/
+│   └── scanner.db
+│
+├── venv/
+├── .env
+├── .gitignore
+├── chatbot.py
+├── config.py
+├── README.md
+├── requirements.txt
+└── run.py
+---
 ## 🖼️ Demo (optional)
 
 > 🚀 Add a demo GIF/screenshot of your app in action here  
